@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-{{ .Chart.Name }}
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      name: pod-{{ .Chart.Name }}
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - image: {{ .Values.app.image }}
+          name: container-{{ .Chart.Name }}
